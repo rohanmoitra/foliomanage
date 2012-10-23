@@ -92,7 +92,7 @@
               <% @daily_gain = stock.holding.to_f * @result[@counter].to_f %>
               <td><%= @daily_gain.round(2) %>
                 <% if @daily_gain > 0 %>
-                  <img src="/img/upArrow.gif"> </img>
+                  <img src="/img/upArrow.png"> </img>
                 <%else%>
                   <img src="/img/down_arrow.png"> </img>
                 <%end%>
@@ -101,7 +101,7 @@
                 <% @overall_gain = (@current_price.to_f-stock.price.to_f) * stock.holding.to_f %>
                 <td><%=@overall_gain.round=%>
                 <% if @overall_gain > 0 %>
-                  <img src="/img/upArrow.gif"> </img>
+                  <img src="/img/upArrow.png"> </img>
                 <%else%>
                   <img src="/img/down_arrow.png"> </img>
                 <%end%>
@@ -127,19 +127,19 @@
           <h2>My Networth </h2> 
           <p> Networth: </p> <%= @total_value %>
           <% if @total_value > 0 %>
-            <img src="/img/upArrow.gif"> </img>
+            <img src="/img/upArrow.png"> </img>
           <%else%>
             <img src="/img/down_arrow.png"> </img>
           <%end%>
           <p> Total Investment </p> <%= @total_investment %>
           <% if @total_investment > 0 %>
-            <img src="/img/upArrow.gif"> </img>
+            <img src="/img/upArrow.png"> </img>
           <%else%>
             <img src="/img/down_arrow.png"> </img>
           <%end%>
           <p> Total Gain </p> <%= @total_gain %>
           <% if @total_gain > 0 %>
-            <img src="/img/upArrow.gif"> </img>
+            <img src="/img/upArrow.png"> </img>
           <%else%>
             <img src="/img/down_arrow.png"> </img>
           <%end%>
