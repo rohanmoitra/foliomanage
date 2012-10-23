@@ -62,33 +62,54 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h2>Your Portfolio</h2>
+        <h2>My Portfolio</h2>
 
           <table>
             <tr>
               <th>Symbol</th>
               <th>Name</th>
               <th>Holding</th>
-              <th>Price</th>
-              <th>Change in Price</th>
+              <th>Inv Price</th>
+              <th>Current Price</th>
               <th>Day's Gain</th>
               <th>Overall Gain</th>
-              <th>Latest Value</th>
+              <th>Current Value</th>
               <th></th>
               <th></th>
               <th></th>
             </tr>
 
-          <% @stocks.each do |stock| %>
+<% @stocks.each do |stock| %>
             <tr>
               <td><%= stock.symbol %></td>
               <td><%= stock.name %></td>
+              <%@counter=@counter+1%>
               <td><%= stock.holding %></td>
               <td><%= stock.price %></td>
-              <td>Change in price</td>
-              <td>Daily Gain</td>
-              <td>Overall Gain</td>
-              <td>Latest Value</td>
+              <% @current_price = @result[@counter] %>
+              <td><%= @current_price %></td>
+              <% @counter=@counter+1 %>
+              <% @daily_gain = stock.holding.to_f * @result[@counter].to_f %>
+              <td><%= @daily_gain.round(2) %>
+                <% if @daily_gain > 0 %>
+                  <img src="/img/upArrow.gif"> </img>
+                <%else%>
+                  <img src="/img/down_arrow.png"> </img>
+                <%end%>
+              </td>
+                <%  @counter=@counter+1 %>
+                <% @overall_gain = (@current_price.to_f-stock.price.to_f) * stock.holding.to_f %>
+                <td><%=@overall_gain.round=%>
+                <% if @overall_gain > 0 %>
+                  <img src="/img/upArrow.gif"> </img>
+                <%else%>
+                  <img src="/img/down_arrow.png"> </img>
+                <%end%>
+              </td>
+              <% @current_value = @current_price.to_f * stock.holding.to_f %>
+                      <td><%=@current_value.round(2)%></td>
+             
+      
               <td><%= link_to 'Show', stock %></td>
               <td><%= link_to 'Edit', edit_stock_path(stock)%></td>
               <td><%= link_to 'Destroy', stock, confirm: 'Are you sure?', method: :delete %></td>
@@ -103,8 +124,25 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="span4">
-          <h2>My Networth</h2>
-          <p> Networth + Total Investment + Total Value </p>
+          <h2>My Networth </h2> 
+          <p> Networth: </p> <%= @total_value %>
+          <% if @total_value > 0 %>
+            <img src="/img/upArrow.gif"> </img>
+          <%else%>
+            <img src="/img/down_arrow.png"> </img>
+          <%end%>
+          <p> Total Investment </p> <%= @total_investment %>
+          <% if @total_investment > 0 %>
+            <img src="/img/upArrow.gif"> </img>
+          <%else%>
+            <img src="/img/down_arrow.png"> </img>
+          <%end%>
+          <p> Total Gain </p> <%= @total_gain %>
+          <% if @total_gain > 0 %>
+            <img src="/img/upArrow.gif"> </img>
+          <%else%>
+            <img src="/img/down_arrow.png"> </img>
+          <%end%>
           <p><a class="btn" href="#">View details &raquo;</a></p>
         </div>
         <div class="span4">
