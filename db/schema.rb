@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121022200917) do
+ActiveRecord::Schema.define(:version => 20121023023133) do
 
   create_table "stocks", :force => true do |t|
     t.string   "symbol"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(:version => 20121022200917) do
     t.decimal  "price",      :precision => 5, :scale => 2
     t.datetime "created_at",                               :null => false
     t.datetime "updated_at",                               :null => false
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
+    t.string   "salt"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end
