@@ -7,15 +7,16 @@ FolioManage::Application.routes.draw do
   end
 
   get "sessions/new"
-
   get "sessions/create"
   get "sessions/destroy"
 
   resources :users
 
   get "stocks/index"
-  
+
+  match "/stocks/add_new_stock" => "stocks#add_new_stock"
   resources :stocks
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -74,4 +75,8 @@ FolioManage::Application.routes.draw do
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id))(.:format)'
+  # match ':controller/:action/:id'
+
+  
+
 end

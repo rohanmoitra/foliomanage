@@ -52,6 +52,15 @@ class StocksController < ApplicationController
     end
   end
 
+  def add_new_stock
+    @stock=Stock.new
+    @stock.symbol = params[:symbol]
+    @stock.name = params[:sname]
+    @stock.holding = params[:hold]
+    @stock.price = params[:price]
+    @stock.save
+
+  end
   # GET /stocks/1
   # GET /stocks/1.json
   def show
