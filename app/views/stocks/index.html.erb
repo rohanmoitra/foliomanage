@@ -48,11 +48,7 @@
               <li><a href="#about">About</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
-            <form class="navbar-form pull-right">
-              <input class="span2" type="text" placeholder="Email">
-              <input class="span2" type="password" placeholder="Password">
-              <button type="submit" class="btn">Sign in</button>
-            </form>
+
           </div><!--/.nav-collapse -->
         </div>
       </div>
@@ -125,19 +121,19 @@
       <div class="row">
         <div class="span4">
           <h2>My Networth </h2> 
-          <p> Networth: </p> <%= @total_value %>
+          <p> Networth: </p> <%= @total_value.round(2) %>
           <% if @total_value > 0 %>
             <img src="/img/upArrow.png"> </img>
           <%else%>
             <img src="/img/down_arrow.png"> </img>
           <%end%>
-          <p> Total Investment </p> <%= @total_investment %>
+          <p> Total Investment </p> <%= @total_investment.round(2) %>
           <% if @total_investment > 0 %>
             <img src="/img/upArrow.png"> </img>
           <%else%>
             <img src="/img/down_arrow.png"> </img>
           <%end%>
-          <p> Total Gain </p> <%= @total_gain %>
+          <p> Total Gain </p> <%= @total_gain.round(2) %>
           <% if @total_gain > 0 %>
             <img src="/img/upArrow.png"> </img>
           <%else%>

@@ -1,6 +1,11 @@
 require 'open-uri'
 require 'csv'
+
+
 class StocksController < ApplicationController
+
+  
+  skip_before_filter :authorize, :only => [:new, :create]
   # GET /stocks
   # GET /stocks.json
   def index
