@@ -2,6 +2,17 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="/javascripts/excanvas/excanvas.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="/javascripts/spinners/spinners.min.js"></script>
+    <script type="text/javascript" src="/javascripts/lightview/lightview.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/lightview/lightview.css"/>
+
     <meta charset="utf-8">
     <title>Portfolio Management</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,7 +57,7 @@
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="mailto:rohanmoitra@gmail.com?Subject=Feedback & Suggestions">Contact</a></li>
             </ul>
 
           </div><!--/.nav-collapse -->
@@ -60,7 +71,13 @@
       <div class="hero-unit">
         <h2>My Portfolio</h2>
 
-          <table>
+          <table border="1">
+              <col width="50">
+              <col width="100">
+              <col width="50">
+              <col width="100">
+              <col width="100">
+              <col width="100"> 
             <tr>
               <th>Symbol</th>
               <th>Name</th>
@@ -70,23 +87,24 @@
               <th>Day's Gain</th>
               <th>Overall Gain</th>
               <th>Current Value</th>
-              <th></th>
+             
               <th></th>
               <th></th>
             </tr>
 
 <% @stocks.each do |stock| %>
             <tr>
-              <td><%= stock.symbol %></td>
-              <td><%= stock.name %></td>
+              <td align="center"><a href="http://finance.yahoo.com/q?s=<%= stock.symbol %> " class="lightview" data-lightview-type="iframe"
+                 data-lightview-options="width: 1000, height: '100%'"><%= stock.symbol %></a></td>
+              <td align="center"><%= stock.name %></td>
               <%@counter=@counter+1%>
-              <td><%= stock.holding %></td>
-              <td><%= stock.price %></td>
+              <td align="center"><%= stock.holding %></td>
+              <td align="center"><%= stock.price %></td>
               <% @current_price = @result[@counter] %>
-              <td><%= @current_price %></td>
+              <td align="center"><%= @current_price %></td>
               <% @counter=@counter+1 %>
               <% @daily_gain = stock.holding.to_f * @result[@counter].to_f %>
-              <td><%= @daily_gain.round(2) %>
+              <td align="center"><%= @daily_gain.round(2) %>
                 <% if @daily_gain > 0 %>
                   <img src="/img/upArrow.png"> </img>
                 <%else%>
@@ -95,7 +113,7 @@
               </td>
                 <%  @counter=@counter+1 %>
                 <% @overall_gain = (@current_price.to_f-stock.price.to_f) * stock.holding.to_f %>
-                <td><%=@overall_gain.round=%>
+                <td align="center"><%=@overall_gain.round=%>
                 <% if @overall_gain > 0 %>
                   <img src="/img/upArrow.png"> </img>
                 <%else%>
@@ -103,10 +121,10 @@
                 <%end%>
               </td>
               <% @current_value = @current_price.to_f * stock.holding.to_f %>
-                      <td><%=@current_value.round(2)%></td>
+                      <td align="center"><%=@current_value.round(2)%></td>
              
       
-              <td><%= link_to 'Show', stock %></td>
+              
               <td><%= link_to 'Edit', edit_stock_path(stock)%></td>
               <td><%= link_to 'Destroy', stock, confirm: 'Are you sure?', method: :delete %></td>
             </tr>
@@ -121,35 +139,31 @@
       <div class="row">
         <div class="span4">
           <h2>My Networth </h2> 
-          <p> Networth: </p> <%= @total_value.round(2) %>
-          <% if @total_value > 0 %>
-            <img src="/img/upArrow.png"> </img>
+          <p> Networth: <%= @total_value.round(2) %>
+          <% if @total_value.round(2) > @total_investment.round(2) %>
+            <img src="/img/upArrow.png"> </img></p> 
           <%else%>
             <img src="/img/down_arrow.png"> </img>
           <%end%>
-          <p> Total Investment </p> <%= @total_investment.round(2) %>
-          <% if @total_investment > 0 %>
-            <img src="/img/upArrow.png"> </img>
-          <%else%>
-            <img src="/img/down_arrow.png"> </img>
-          <%end%>
-          <p> Total Gain </p> <%= @total_gain.round(2) %>
+            <p> Total Investment: <%= @total_investment.round(2) %></p>
+          
+          <p> Total Portfolio Gain: <%= @total_gain.round(2) %>
           <% if @total_gain > 0 %>
-            <img src="/img/upArrow.png"> </img>
+            <img src="/img/upArrow.png"> </img> </p> 
           <%else%>
             <img src="/img/down_arrow.png"> </img>
           <%end%>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+          
         </div>
         <div class="span4">
           <h2>Max Gainer</h2>
           <p> </p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+          
        </div>
         <div class="span4">
           <h2>Max Loser</h2>
           <p></p>
-          <p><a class="btn" href="#">View details &raquo;</a></p>
+          
         </div>
       </div>
 
