@@ -44,6 +44,8 @@ class StocksController < ApplicationController
       @stocks_array.push(@hash)
     end
     @total_gain=@total_value.to_f-@total_investment.to_f
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @stocks }
